@@ -6,18 +6,27 @@ This plugin adds a new field type to Matt Gibbs' [Custom Field Suite](https://gi
 
 The following options are supported:
 
-| Option             | HTML Attribute | Description                                                                  |
-|--------------------|----------------|------------------------------------------------------------------------------|
-| Type               | type           | HTML5 field type: text, email, number, tel, or url                           |
-| Default Value      | value          | Value for the field upon creation                                            |
-| Placeholder        | placeholder    | Text to display as the input placeholder                                     |
-| Required           | required       | Mark the field as required (also adds "required" attribute, unlike CFS core) |
-| Validation Pattern | pattern        | HTML5 validation pattern regexp, for client-side validation                  |
-| Max Length         | maxlength      | Maximum number of characters                                                 |
+| Option             | HTML Attribute | Description                                                                   |
+|--------------------|----------------|-------------------------------------------------------------------------------|
+| Type               | type           | HTML5 field type: text, email, number, tel, or url                            |
+| Default Value      | value          | Value for the field upon creation                                             |
+| Placeholder        | placeholder    | Text to display as the input placeholder                                      |
+| Required           | required       | Mark the field as required (also adds "required" attribute, unlike CFS core)  |
+| Validation Pattern | pattern        | HTML5 validation pattern regexp, for client-side validation                   |
+| Max Length         | maxlength      | Maximum number of characters                                                  |
+| Number: Min        | min            | Minimum value for a number field                                              |
+| Number: Max        | max            | Maximum value for a number field                                              |
+| Number: Step       | step           | The amount to increment or decrement the number field when stepper is clicked |
 
-Support for `min`, `max`, and `step` is coming soon.
+Note that these options (with the exception of "required") are client-side validators, and shouldn't be trusted to completely prevent bad input.
 
-Note that these options (with the exception of "required") are client-side validators.
+The number-specific options are only visible once you've saved an Advanced Text field with the "number" type (similar to saving after adding a loop field).
+
+## Browser compatibility
+
+While most major/recent browsers support the HTML5 input attributes and field types, some don't. Notably, Safari (for the Mac or iOS) and certain older Android versions won't actually notify the user if their input is invalid before submitting a form (although it won't POST the invalid input).
+
+Additionally, Internet Explorer only started supporting client side form validation in version 10.
 
 ## License
 
