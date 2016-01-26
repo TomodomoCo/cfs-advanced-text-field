@@ -33,6 +33,19 @@ class cfs_advanced_text extends cfs_field {
 		if ( isset( $field->required ) && $field->required != false )
 			$attributes[] = 'required';
 
+		// Set number field attributes
+		if ( $field->options['type'] == 'number' ) {
+
+			if ( isset( $field->options['max'] ) && ! empty( $field->options['max'] ) )
+				$attributes[] = 'max="' . $field->options['max'] . '"';
+
+			if ( isset( $field->options['min'] ) && ! empty( $field->options['min'] ) )
+				$attributes[] = 'min="' . $field->options['min'] . '"';
+
+			if ( isset( $field->options['step'] ) && ! empty( $field->options['step'] ) )
+				$attributes[] = 'step="' . $field->options['step'] . '"';
+		}
+
 		echo '<input ' . implode( $attributes, ' ' ) . '>';
 	}
 
@@ -43,6 +56,11 @@ class cfs_advanced_text extends cfs_field {
 	 * @param $field
 	 */
 	function options_html( $key, $field ) {
+		if ( $this->get_option( $field, 'type' ) == 'number' ) {
+			$number_option_display = 'style="display: unset;"';
+		} else {
+			$number_option_display = 'style="display: none;"';
+		}
 	?>
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
@@ -138,6 +156,48 @@ class cfs_advanced_text extends cfs_field {
 					'type'       => 'text',
 					'input_name' => "cfs[fields][$key][options][maxlength]",
 					'value'      => $this->get_option( $field, 'maxlength' ),
+				));
+				?>
+			</td>
+		</tr>
+		<tr class="field_option field_option_cfsatf_number field_option_<?php echo $this->name; ?>" <?php echo $number_option_display; ?>>
+			<td class="label">
+				<label><?php _e( '<strong>Number:</strong> Min', 'cfs' ); ?></label>
+			</td>
+			<td>
+				<?php
+				CFS()->create_field( array(
+					'type'       => 'text',
+					'input_name' => "cfs[fields][$key][options][min]",
+					'value'      => $this->get_option( $field, 'min' ),
+				));
+				?>
+			</td>
+		</tr>
+		<tr class="field_option field_option_cfsatf_number field_option_<?php echo $this->name; ?>" <?php echo $number_option_display; ?>>
+			<td class="label">
+				<label><?php _e( '<strong>Number:</strong> Max', 'cfs' ); ?></label>
+			</td>
+			<td>
+				<?php
+				CFS()->create_field( array(
+					'type'       => 'text',
+					'input_name' => "cfs[fields][$key][options][max]",
+					'value'      => $this->get_option( $field, 'max' ),
+				));
+				?>
+			</td>
+		</tr>
+		<tr class="field_option field_option_cfsatf_number field_option_<?php echo $this->name; ?>" <?php echo $number_option_display; ?>>
+			<td class="label">
+				<label><?php _e( '<strong>Number:</strong> Step', 'cfs' ); ?></label>
+			</td>
+			<td>
+				<?php
+				CFS()->create_field( array(
+					'type'       => 'text',
+					'input_name' => "cfs[fields][$key][options][step]",
+					'value'      => $this->get_option( $field, 'step' ),
 				));
 				?>
 			</td>
