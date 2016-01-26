@@ -1,0 +1,16 @@
+{
+  "name": "vanpattenmedia/cfs-advanced-text-field",
+  "description": "Text field type for Custom Field Suite with additional customisation options",
+  "keywords": ["wordpress", "plugin"],
+  "homepage": "https://www.vanpattenmedia.com/",
+  "authors": [
+    {
+      "name": "Chris Van Patten",
+      "homepage": "http://www.chrisvanpatten.com/"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "~1.0"
+  }
+}
