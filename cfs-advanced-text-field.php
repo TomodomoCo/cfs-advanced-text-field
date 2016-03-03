@@ -3,7 +3,7 @@
 Plugin Name: CFS Advanced Text Field
 Plugin URI: http://customfieldsuite.com/
 Description: Text field type for Custom Field Suite with additional customisation options
-Version: 1.1.0
+Version: 1.1.1
 Author: Van Patten Media Inc.
 Author URI: https://www.vanpattenmedia.com/
 Text Domain: cfs_advanced_text

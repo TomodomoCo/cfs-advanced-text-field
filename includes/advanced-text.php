@@ -27,7 +27,7 @@ class cfs_advanced_text extends cfs_field {
 		if ( isset( $field->options['placeholder'] ) && ! empty( $field->options['placeholder'] ) )
 			$attributes[] = 'placeholder="' . $field->options['placeholder'] . '"';
 
-		if ( isset( $field->options['maxlength'] ) && ! empty( $field->options['maxlength'] ) )
+		if ( isset( $field->options['maxlength'] ) && is_numeric( $field->options['maxlength'] ) )
 			$attributes[] = 'maxlength="' . $field->options['maxlength'] . '"';
 
 		if ( isset( $field->required ) && $field->required != false )
@@ -36,13 +36,13 @@ class cfs_advanced_text extends cfs_field {
 		// Set number field attributes
 		if ( $field->options['type'] == 'number' ) {
 
-			if ( isset( $field->options['max'] ) && ! empty( $field->options['max'] ) )
-				$attributes[] = 'max="' . $field->options['max'] . '"';
-
-			if ( isset( $field->options['min'] ) && ! empty( $field->options['min'] ) )
+			if ( isset( $field->options['min'] ) && is_numeric( $field->options['min'] ) )
 				$attributes[] = 'min="' . $field->options['min'] . '"';
 
-			if ( isset( $field->options['step'] ) && ! empty( $field->options['step'] ) )
+			if ( isset( $field->options['max'] ) && is_numeric( $field->options['max'] ) )
+				$attributes[] = 'max="' . $field->options['max'] . '"';
+
+			if ( isset( $field->options['step'] ) && is_numeric( $field->options['step'] ) )
 				$attributes[] = 'step="' . $field->options['step'] . '"';
 		}
 
