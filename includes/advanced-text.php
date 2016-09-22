@@ -56,11 +56,10 @@ class cfs_advanced_text extends cfs_field {
 	 * @param $field
 	 */
 	function options_html( $key, $field ) {
-		if ( $this->get_option( $field, 'type' ) == 'number' ) {
-			$number_option_display = 'style="display: unset;"';
-		} else {
+		if ( $this->get_option( $field, 'type' ) !== 'number' )
 			$number_option_display = 'style="display: none;"';
-		}
+		else
+			$number_option_display = '';
 	?>
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
