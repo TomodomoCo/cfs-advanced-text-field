@@ -8,7 +8,8 @@ The following options are supported:
 
 | Option             | HTML Attribute | Description                                                                   |
 |--------------------|----------------|-------------------------------------------------------------------------------|
-| Type               | type           | HTML5 field type: text, email, number, tel, or url                            |
+| Input Type         | type           | HTML5 field type: text, email, number, tel, or url                            |
+| Cast Return Value  | n/a            | Cast the returned value as a string, int, float, or bool (defaults to string) |
 | Default Value      | value          | Value for the field upon creation                                             |
 | Placeholder        | placeholder    | Text to display as the input placeholder                                      |
 | Required           | required       | Mark the field as required (also adds "required" attribute, unlike CFS core)  |
@@ -18,9 +19,11 @@ The following options are supported:
 | Number: Max        | max            | Maximum value for a number field                                              |
 | Number: Step       | step           | The amount to increment or decrement the number field when stepper is clicked |
 
-Note that these options (with the exception of "required") are client-side validators, and shouldn't be trusted to completely prevent bad input.
+Note that these options (with the exception of "Required" and "Cast Return Value") are client-side validators, and shouldn't be trusted to completely prevent bad input.
 
 The number-specific options are only visible once you've saved an Advanced Text field with the "number" type (similar to saving after adding a loop field).
+
+Casting the return should be used with caution. You will probably want to enable a validation pattern to be extra certain the data is input properly. Note that by default, "no" and "false" strings will be cast to `false` when you select the `bool` cast option. To disable this, add a filter to your functions.php or elsewhere: `add_filter('cfs_advanced_text_allow_bool_cheats', '__return_true');`
 
 ## Browser compatibility
 
