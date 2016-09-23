@@ -63,7 +63,7 @@ class cfs_advanced_text extends cfs_field {
 	?>
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
-				<label><?php _e( 'Type', 'cfs' ); ?></label>
+				<label><?php _e( 'Input Type', 'cfs' ); ?></label>
 			</td>
 			<td>
 				<?php
@@ -81,6 +81,29 @@ class cfs_advanced_text extends cfs_field {
 						'force_single' => true,
 					),
 					'value' => $this->get_option( $field, 'type', 'text' ),
+				));
+				?>
+			</td>
+		</tr>
+		<tr class="field_option field_option_<?php echo $this->name; ?>">
+			<td class="label">
+				<label><?php _e( 'Cast Return Value', 'cfs' ); ?></label>
+			</td>
+			<td>
+				<?php
+				CFS()->create_field( array(
+					'type'        => 'select',
+					'input_name'  => "cfs[fields][$key][options][cast_to]",
+					'options'     => array(
+						'choices' => array(
+							'string' => 'string',
+							'int'    => 'int',
+							'float'  => 'float',
+							'bool'   => 'bool',
+						),
+						'force_single' => true,
+					),
+					'value' => $this->get_option( $field, 'cast_to', 'number' ),
 				));
 				?>
 			</td>
@@ -203,5 +226,43 @@ class cfs_advanced_text extends cfs_field {
 		</tr>
 	<?php
 	}
+
+	/**
+	 * Format the given value to be returned
+	 *
+	 * @param mixed $value
+	 * @param array $field
+	 * @return string|int|float|bool
+	 */
+    function format_value_for_api( $value, $field = null ) {
+		// Get the cast
+		$cast_to = $this->get_option( $field, 'cast_to', 'string' );
+
+		// Cast to string
+		if ( $cast_to === 'string' )
+			return strval($value);
+
+		// Cast to int
+		if ( $cast_to === 'int' )
+			return intval($value);
+
+		// Cast to float
+		if ( $cast_to === 'float' )
+			return floatval($value);
+
+		// Allow bool cheats
+		$allow_bool_cheats = apply_filters('cfs_advanced_text_allow_bool_cheats', true);
+
+		// Allow casting 'false' or 'no' as (bool) false, because hax
+		if ( $cast_to === 'bool' && $allow_bool_cheats === true && ( $value == 'no' || $value == 'false' ) )
+			return false;
+
+		// Cast to boolean the normal way
+		if ( $cast_to === 'bool' )
+			return $value == true;
+
+		// We should probably never be here, but if so... ¯\_(ツ)_/¯
+		return $value;
+    }
 
 }
